@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Book: {{ ride.name }}</h2>
+
+<form method="post">
+  <div class="mb-3">
+    <label class="form-label">Name</label>
+    <input class="form-control" name="name" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Phone</label>
+    <input class="form-control" name="phone">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input class="form-control" name="email">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Quantity</label>
+    <input type="number" class="form-control" name="qty" value="1" required>
+  </div>
+
+  <button class="btn btn-primary">Create Booking</button>
+</form>
+
+{% endblock %}

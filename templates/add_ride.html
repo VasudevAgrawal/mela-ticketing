@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Add Ride</h2>
+
+<form method="post" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label class="form-label">Name</label>
+    <input class="form-control" name="name" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Price (₹)</label>
+    <input type="number" class="form-control" name="price" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    <textarea class="form-control" name="description"></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Ride Image</label>
+    <input type="file" class="form-control" name="image_file" accept="image/*">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Capacity</label>
+    <input type="number" class="form-control" name="capacity" value="100">
+  </div>
+
+  <button class="btn btn-primary">Add Ride</button>
+</form>
+
+{% endblock %}

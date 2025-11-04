@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if ride %}
+<div class="card shadow p-4">
+  <h2 class="fw-bold">{{ ride.name }}</h2>
+
+  {% if ride.image %}
+  <img src="{{ ride.image }}" class="img-fluid rounded mb-3" style="max-height:300px; object-fit:cover;">
+  {% endif %}
+
+  <p>{{ ride.description }}</p>
+  <p class="fw-bold fs-5">Price: ₹{{ ride.price }}</p>
+
+  <a href="{{ url_for('book_ride', ride_id=ride.id) }}" class="btn btn-success btn-lg">
+    Book Now
+  </a>
+</div>
+{% else %}
+<p class="text-danger fw-bold">Ride not found.</p>
+{% endif %}
+
+{% endblock %}

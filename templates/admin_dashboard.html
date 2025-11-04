@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Admin Dashboard</h2>
+
+<p>Total bookings: {{ total_bookings or 0 }}</p>
+<p>Total revenue: ₹{{ total_revenue or 0 }}</p>
+
+<a class="btn btn-success" href="{{ url_for('add_ride') }}">Add Ride</a>
+<a class="btn btn-secondary" href="{{ url_for('admin_bookings') }}">View Bookings</a>
+<a class="btn btn-info" href="{{ url_for('export_csv') }}">Export CSV</a>
+
+<hr>
+<h3 class="mt-4">Rides</h3>
+
+<table class="table table-bordered mt-3">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+<canvas id="bookingsChart" width="400" height="150"></canvas>
+<h3 class="mt-4">Rides</h3>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for ride in rides %}
+    <tr>
+      <td>{{ ride.id }}</td>
+      <td>{{ ride.name }}</td>
+      <td>₹{{ ride.price }}</td>
+      <td>
+        <a class="btn btn-danger btn-sm"
+           href="{{ url_for('delete_ride', ride_id=ride.id) }}">
+           Delete
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const ctx = document.getElementById('bookingsChart');
+
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: {{ labels | tojson | safe }},
+    datasets: [{
+      label: 'Bookings',
+      data: {{ counts | tojson | safe }},
+      borderWidth: 2,
+      borderColor: 'blue',
+      tension: 0.2
+    }]
+  }
+});
+</script>
+
+{% endblock %}
